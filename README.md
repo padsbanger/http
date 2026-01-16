@@ -1,2 +1,3 @@
 # http
-Simple HTTP server written in Rust. 
+Simple HTTP server written in Rust.
+
