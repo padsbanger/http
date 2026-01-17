@@ -2,23 +2,34 @@ mod http;
 mod server;
 mod website_handler;
 
-use http::Method;
-use http::Request;
+use clap::Parser;
+use std::env;
 
-use ::std::env;
 use server::Server;
 use website_handler::WebsiteHandler;
 
-fn main() {
-    let default_path = format!("{}/public", env!("CARGO_MANIFEST_DIR"));
+#[derive(Parser, Debug)]
+#[command(about = "Simple static HTTP server")]
+struct Args {
+    /// Host address to bind to
+    #[arg(long, default_value = "127.0.0.1")]
+    host: String,
 
-    let public_path = env::var("PUBLIC_PATH").unwrap_or(default_path);
+    /// Port to listen on
+    #[arg(short = 'p', long, default_value_t = 8080)]
+    port: u16,
 
-    let server = Server::new(String::from("127.0.0.1:8080"));
-
-    server.run(WebsiteHandler::new(public_path));
+    /// Directory to serve files from
+    #[arg(short = 'd', long, default_value = "public")]
+    directory: String,
 }
 
-//
-//GET /users?id=10 HTTP/1.1\r\n
-//use
+fn main() {
+    let args = Args::parse();
+
+    let directory = format!("{}/{}", env!("CARGO_MANIFEST_DIR"), Args::parse().directory);
+
+    let server = Server::new(Args::parse().host, Args::parse().port.to_string());
+
+    server.run(WebsiteHandler::new(directory));
+}

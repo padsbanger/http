@@ -7,7 +7,8 @@ use crate::http::ParseError;
 use super::http::{Request, Response, StatusCode};
 
 pub struct Server {
-    address: String,
+    port: String,
+    host: String,
 }
 
 pub trait Handler {
@@ -18,13 +19,15 @@ pub trait Handler {
 }
 
 impl Server {
-    pub fn new(address: String) -> Self {
-        Self { address }
+    pub fn new(host: String, port: String) -> Self {
+        Self { port, host }
     }
     pub fn run(&self, mut handler: impl Handler) {
-        println!("Listening on address: {}", self.address);
+        let address = format!("{}:{}", self.host, self.port);
 
-        let listener = TcpListener::bind(&self.address).unwrap();
+        println!("Listening on address: {}", address);
+
+        let listener = TcpListener::bind(address).unwrap();
 
         loop {
             match listener.accept() {
@@ -45,7 +48,5 @@ impl Server {
                 }
             }
         }
-
-        //if(listener.)
     }
 }
