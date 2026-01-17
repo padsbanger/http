@@ -53,8 +53,8 @@ impl Response {
             write!(stream, "Content-Length: 0\r\n")?;
         }
 
-        write!(stream, "Connection: keep-alive\r\n\r\n")?;
-        write!(stream, "Server: MyRustServer\r\n\r\n")?;
+        write!(stream, "Connection: keep-alive\r\n")?;
+        write!(stream, "Server: MyRustServer\r\n")?;
 
         write!(stream, "\r\n")?;
 

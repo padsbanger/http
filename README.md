@@ -20,4 +20,5 @@ cargo build
 
 - ~~Headers in response~~
 - Spawn each listener in separate thread
+- Make listener buffer bigger/dynamic
 - Implement http2
