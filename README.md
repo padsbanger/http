@@ -18,6 +18,6 @@ cargo build
 
 ## To-do
 
+- ~~Headers in response~~
 - Spawn each listener in separate thread
-- ``Headers in response``
 - Implement http2
