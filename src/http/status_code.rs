@@ -15,6 +15,10 @@ impl StatusCode {
             Self::NotFound => "Not found",
         }
     }
+
+    pub fn as_u16(&self) -> u16 {
+        *self as u16
+    }
 }
 
 impl Display for StatusCode {
