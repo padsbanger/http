@@ -14,7 +14,7 @@ pub struct Server {
 pub trait Handler {
     fn handle_request(&mut self, request: &Request) -> Response;
     fn handle_bad_request(&mut self, e: &ParseError) -> Response {
-        Response::new(StatusCode::BadRequest, None)
+        Response::new(StatusCode::BadRequest, None, None)
     }
 }
 
@@ -38,7 +38,7 @@ impl Server {
                             Ok(request) => handler.handle_request(&request),
                             Err(e) => handler.handle_bad_request(&e),
                         },
-                        Err(err) => Response::new(StatusCode::BadRequest, None),
+                        Err(err) => Response::new(StatusCode::BadRequest, None, None),
                     };
 
                     if let Err(e) = response.send(&mut stream) {}

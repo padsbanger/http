@@ -10,7 +10,7 @@ Simple HTTP server written in Rust.
 cargo build
 ```
 
-2. Run
+1. Run
 
 ```
 ./http --host 127.0.0.1 --port 8080 --directory /public
@@ -19,4 +19,5 @@ cargo build
 ## To-do
 
 - Spawn each listener in separate thread
-- Headers in response
+- ``Headers in response``
+- Implement http2
