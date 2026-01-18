@@ -19,6 +19,7 @@ cargo build
 ## To-do
 
 - ~~Headers in response~~
+- Dump all requests into log.txt file
 - Spawn each listener in separate thread
 - Make listener buffer bigger/dynamic
 - Implement http2
